@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>끝말잇기</title>
+  </head>
+  <body>
+    <div><span id="order">1</span>번째 참가자</div>
+    <div>제시어: <span id="word"></span></div>
+    <input type="text" />
+    <button>입력</button>
+    <script>
+      let participant = prompt('몇 명이 참가하시겠습니까?', 1);
+      let $input = document.querySelector('input');
+      let $button = document.querySelector('button');
+      let $word = document.querySelector('#word');
+      let orderOfParticipant = 1;
+      $word.innerText = '';
+      function showWord() {
+        let $order = document.querySelector('#order');
+
+        if (orderOfParticipant == participant) {
+          orderOfParticipant = 1;
+          $order.innerText = orderOfParticipant;
+        } else {
+          orderOfParticipant++;
+          $order.innerText = orderOfParticipant;
+        }
+
+        if (
+          $word.innerText === '' ||
+          $word.innerText.slice(-1) === $input.value.slice(0, 1)
+        ) {
+          $word.innerText = $input.value;
+        } else {
+          $word.innerText = '';
+          // orderOfParticipant = 1;  --> 첫번째로 돌아가기
+          // $order.innerText = orderOfParticipant;
+          alert('틀렸습니다!');
+        }
+        $input.value = '';
+      }
+      $button.addEventListener('click', showWord);
+    </script>
+  </body>
+</html>
+
+<!-- 유효성 검사해봐야함, prompt창에 문자 입력 하면 안되게하기 -->
